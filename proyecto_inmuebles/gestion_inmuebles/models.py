@@ -2,6 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class Region(models.Model):
+    nombre_region = models.CharField(max_length=100)
+    numero_region = models.CharField(max_length=10, null=True)
+
+    def __str__(self):
+        return self.nombre_region
+
+class Comuna(models.Model):
+    nombre_comuna = models.CharField(max_length=100)
+    codigo_postal = models.CharField(max_length=10, null=True)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='comunas')
+
+    def __str__(self):
+        return self.nombre_comuna    
+    
 class Perfil(models.Model):
     TIPO_USUARIO = [
         ('Arrendatario', 'Arrendatario'),
@@ -16,7 +31,8 @@ class Perfil(models.Model):
     telefono = models.CharField(max_length=15)
     correo_electronico = models.EmailField()
     tipo_usuario = models.CharField(max_length=12, choices=TIPO_USUARIO)
-
+    comuna = models.ForeignKey(Comuna, on_delete=models.SET_NULL, null=True)
+    
     def __str__(self):
         return f"{self.nombres} {self.apellidos} - {self.tipo_usuario}"
 
@@ -35,7 +51,7 @@ class Inmueble(models.Model):
     cantidad_habitaciones = models.IntegerField()
     cantidad_banos = models.IntegerField()
     direccion = models.CharField(max_length=255)
-    comuna = models.CharField(max_length=100)
+    comuna = models.ForeignKey(Comuna, on_delete=models.SET_NULL, null=True)
     tipo_inmueble = models.CharField(max_length=20, choices=TIPO_INMUEBLE)
     precio_mensual = models.DecimalField(max_digits=12, decimal_places=2)
     arrendador = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='propiedades')

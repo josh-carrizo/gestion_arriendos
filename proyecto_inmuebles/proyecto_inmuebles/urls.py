@@ -21,7 +21,5 @@ from gestion_inmuebles import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('registro/', views.registro_usuario, name='registro'),
-    path('inmuebles/', include('inmuebles.urls')),
-
 
 ]
