@@ -7,7 +7,7 @@ class Inmueble_admin(admin.ModelAdmin):
     list_display = ('nombre', 'direccion', 'precio_mensual', 'comuna', 'tipo_inmueble')
     search_fields = ('nombre', 'direccion', 'comuna__nombre_comuna', 'tipo_inmueble')
     list_filter = ('tipo_inmueble', 'comuna', 'precio_mensual')
-    # readonly_fields =('fecha_creacion','ultima_modificacion')
+    readonly_fields =('fecha_creacion','ultima_modificacion')
     
     # def save_model(self, request, obj, form, change):
     #     if change:

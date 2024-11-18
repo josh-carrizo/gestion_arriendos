@@ -55,6 +55,9 @@ class Inmueble(models.Model):
     tipo_inmueble = models.CharField(max_length=20, choices=TIPO_INMUEBLE)
     precio_mensual = models.DecimalField(max_digits=12, decimal_places=2)
     arrendador = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='propiedades')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)  
+    ultima_modificacion = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return f"{self.nombre} - {self.tipo_inmueble} en {self.comuna}"
