@@ -23,5 +23,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('registro/', views.registro_usuario, name='registro'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('crear_inmueble/', views.crear_inmueble, name='crear_inmueble'),
+    path('editar_inmueble/<int:id>/', views.editar_inmueble, name='editar_inmueble'),
+    path('eliminar_inmueble/<int:id>/', views.eliminar_inmueble, name='eliminar_inmueble'),
+    path('ver_mas_inmueble/<int:id>/', views.ver_mas_inmueble, name='ver_mas_inmueble'),
+
     path('', views.home, name='home'),
 ]

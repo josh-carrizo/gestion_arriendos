@@ -57,6 +57,8 @@ class Inmueble(models.Model):
     arrendador = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='propiedades')
     fecha_creacion = models.DateTimeField(auto_now_add=True)  
     ultima_modificacion = models.DateTimeField(auto_now=True)
+    imagen = models.ImageField(upload_to='static/', null=True, blank=True)
+
 
 
     def __str__(self):
