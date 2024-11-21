@@ -29,7 +29,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
     
     {% for inmueble in inmuebles %}
-    <p><strong>Perfil:</strong> {{ inmueble.arrendador.tipo_usuario }}</p>
+    
     <div class="col">
         <div class="card h-100">
             <img src="/static/img/default.jpg" class="card-img-top" alt="{{ inmueble.nombre }}">
@@ -43,11 +43,20 @@
                         <li><strong>Región:</strong> {{ inmueble.comuna.region.nombre_region }}</li>
                     </ul>
                 </div>
+
                 {% if inmueble.arrendador.usuario == request.user %}
                     <a href="{% url 'editar_inmueble' inmueble.id %}" class="btn btn-warning">Editar</a>
                     <a href="{% url 'eliminar_inmueble' inmueble.id %}" class="btn btn-danger">Eliminar</a>
+                    <p><strong>Dueño anuncio:</strong> {{ inmueble.arrendador.nombres }} {{ inmueble.arrendador.apellidos }}</p>
                 {% endif %}
+                {% if inmueble.arrendador.usuario != request.user %}
                 <a href="{% url 'ver_mas_inmueble' inmueble.id %}" class="btn btn-primary">Ver más</a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <p><strong>Perfil:</strong> {{ inmueble.arrendador.tipo_usuario }}</p>
+                {% else %}
+                <p><strong>Perfil:</strong> No ha iniciado sesión. <a href="{% url 'login' %}">Iniciar sesión</a></p>
+                {% endif %}
             </div>
         </div>
     </div>

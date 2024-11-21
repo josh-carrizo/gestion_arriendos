@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = "Cargar inmuebles en la base de datos desde un archivo JSON."
 
     def handle(self, *args, **kwargs):
-        with open('gestion_inmuebles/inmuebles.json', 'r', encoding='utf-8') as file:
+        with open('gestion_inmuebles/management/json/inmuebles.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
             
             for inmueble_data in data["inmuebles"]:

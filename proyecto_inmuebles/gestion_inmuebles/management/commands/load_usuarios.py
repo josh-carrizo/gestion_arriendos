@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = "Cargar usuarios en la base de datos desde un archivo JSON."
 
     def handle(self, *args, **kwargs):
-        with open('gestion_inmuebles/usuarios.json', 'r', encoding='utf-8') as file:
+        with open('gestion_inmuebles/management/json/usuarios.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
             
             for usuario_data in data["usuarios"]:

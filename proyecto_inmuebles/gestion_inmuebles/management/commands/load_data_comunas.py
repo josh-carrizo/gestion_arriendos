@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = "Cargar datos de regiones y comunas en la base de datos desde un archivo JSON."
 
     def handle(self, *args, **kwargs):
-        with open('gestion_inmuebles/regiones_y_comunas.json', 'r', encoding='utf-8') as file:
+        with open('gestion_inmuebles/management/json/regiones_y_comunas.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
             
             for region_data in data["regions"]:

@@ -18,7 +18,14 @@
       <p><strong>Numero de la región:</strong> {{ inmueble.comuna.region.numero_region }} </p>
       <p><strong>Tipo de inmueble:</strong> {{ inmueble.tipo_inmueble }}</p>
       <p><strong>Precio mensual:</strong> {{ inmueble.precio_mensual }} CLP</p>
-      <p><strong>Publicacion realizada por:</strong> {{ inmueble.arrendador.usuario }}, Numero de contacto: {{ inmueble.arrendador.telefono }}</p>
+      <p><strong>Publicacion realizada por:</strong> {{ inmueble.arrendador.nombres }} {{ inmueble.arrendador.apellidos }}</p>
+      <div class="px-5"> 
+        <ul class="">
+          <li><strong>Nombre Usuario:</strong> {{ inmueble.arrendador.usuario }}</li>
+          <li><strong>Numero de contacto:</strong> {{ inmueble.arrendador.telefono }}</li>
+          <li><strong>Email:</strong> {{ inmueble.arrendador.email }}</li>
+        </ul>
+      </div>
       <p><strong>Fecha de creación:</strong> {{ inmueble.fecha_creacion }}</p>
       <p><strong>Última modificación:</strong> {{ inmueble.ultima_modificacion}}</p>
 
