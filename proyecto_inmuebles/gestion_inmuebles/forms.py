@@ -14,9 +14,49 @@ class RegistroUsuarioForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'nombres', 'apellidos', 'rut', 'direccion', 'telefono', 'correo_electronico', 'tipo_usuario']
+        fields = [
+            'tipo_usuario',
+            'nombres',
+            'apellidos',
+            'rut',
+            'direccion',
+            'telefono',
+            'correo_electronico',
+            'username',
+            'password1',
+            'password2',]
 
 class InmuebleForm(forms.ModelForm):
     class Meta:
         model = Inmueble
-        fields = ['nombre', 'descripcion', 'precio_mensual', 'comuna', 'tipo_inmueble', 'imagen']
+        fields = ['nombre',
+                'descripcion',
+                'metros_construidos',
+                'metros_totales',
+                'cantidad_estacionamientos',
+                'cantidad_habitaciones',
+                'cantidad_banos',
+                'direccion',
+                'comuna',
+                'tipo_inmueble',
+                'precio_mensual',
+                'imagen',
+                ]
+
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = [
+            'nombres', 'apellidos', 'rut', 'direccion', 
+            'telefono', 'correo_electronico', 'tipo_usuario', 'comuna'
+        ]
+        widgets = {
+            'nombres': forms.TextInput(attrs={'class': 'form-control'}),
+            'apellidos': forms.TextInput(attrs={'class': 'form-control'}),
+            'rut': forms.TextInput(attrs={'class': 'form-control'}),
+            'direccion': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono': forms.TextInput(attrs={'class': 'form-control'}),
+            'correo_electronico': forms.EmailInput(attrs={'class': 'form-control'}),
+            'tipo_usuario': forms.Select(attrs={'class': 'form-control'}),
+            'comuna': forms.Select(attrs={'class': 'form-control'}),
+        }

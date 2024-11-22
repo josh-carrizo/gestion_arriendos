@@ -28,6 +28,6 @@ urlpatterns = [
     path('editar_inmueble/<int:id>/', views.editar_inmueble, name='editar_inmueble'),
     path('eliminar_inmueble/<int:id>/', views.eliminar_inmueble, name='eliminar_inmueble'),
     path('ver_mas_inmueble/<int:id>/', views.ver_mas_inmueble, name='ver_mas_inmueble'),
-
+    path('editar_perfil/', views.editar_perfil, name='editar_perfil'),
     path('', views.home, name='home'),
 ]

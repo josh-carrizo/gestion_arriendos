@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
+
 
 # Create your models here.
 class Region(models.Model):
@@ -45,15 +47,23 @@ class Inmueble(models.Model):
 
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
-    metros_construidos = models.DecimalField(max_digits=10, decimal_places=2)
-    metros_totales = models.DecimalField(max_digits=10, decimal_places=2)
-    cantidad_estacionamientos = models.IntegerField()
-    cantidad_habitaciones = models.IntegerField()
-    cantidad_banos = models.IntegerField()
+    metros_construidos = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0.01)]
+        )
+    metros_totales = models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        validators=[MinValueValidator(0.01)]
+    )    
+    cantidad_estacionamientos = models.IntegerField(validators=[MinValueValidator(1)])
+    cantidad_habitaciones = models.IntegerField(validators=[MinValueValidator(1)])
+    cantidad_banos = models.IntegerField(validators=[MinValueValidator(1)])
     direccion = models.CharField(max_length=255)
     comuna = models.ForeignKey(Comuna, on_delete=models.SET_NULL, null=True)
     tipo_inmueble = models.CharField(max_length=20, choices=TIPO_INMUEBLE)
-    precio_mensual = models.DecimalField(max_digits=12, decimal_places=2)
+    precio_mensual = models.DecimalField(max_digits=12, decimal_places=2,validators=[MinValueValidator(0.01)])
     arrendador = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='propiedades')
     fecha_creacion = models.DateTimeField(auto_now_add=True)  
     ultima_modificacion = models.DateTimeField(auto_now=True)

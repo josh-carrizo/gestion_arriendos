@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import RegistroUsuarioForm, InmuebleForm
+from django.contrib.auth.decorators import login_required
+from .forms import RegistroUsuarioForm, InmuebleForm, EditarPerfilForm
 from django.contrib.auth import login
 from .models import Perfil, Inmueble, Region
 from django.contrib import messages
@@ -84,3 +85,17 @@ def eliminar_inmueble(request, id):
 def ver_mas_inmueble(request, id):
     inmueble = get_object_or_404(Inmueble, id=id)
     return render(request, 'ver_mas_inmueble.html', {'inmueble': inmueble})
+
+@login_required
+def editar_perfil(request):
+    perfil = get_object_or_404(Perfil, usuario=request.user)
+    
+    if request.method == 'POST':
+        form = EditarPerfilForm(request.POST, instance=perfil)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Cambia esto según tu URL
+    else:
+        form = EditarPerfilForm(instance=perfil)
+    
+    return render(request, 'editar_perfil.html', {'form': form})

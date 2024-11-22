@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gestion_inmuebles',
+    'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
