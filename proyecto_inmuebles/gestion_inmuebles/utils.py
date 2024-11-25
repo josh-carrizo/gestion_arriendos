@@ -3,7 +3,7 @@ import re
 def validar_rut(rut):
     rut = rut.upper().replace("-", "").replace(".", "")
     rut_body = rut[:-1]
-    dv = rut[-1] #digito verificador
+    dv = rut[-1] 
 
     if not rut_body.isdigit() or (dv not in "0123456789K"):
         return False

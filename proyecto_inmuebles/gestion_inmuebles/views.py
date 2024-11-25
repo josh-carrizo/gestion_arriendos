@@ -39,9 +39,8 @@ def home(request):
         inmuebles = inmuebles.filter(tipo_inmueble=tipo_inmueble)
     
     if ordenar_por_fecha == 'asc':
-        inmuebles = inmuebles.order_by('fecha_creacion')  # Orden ascendente (más antiguos primero)
-    else:
-        inmuebles = inmuebles.order_by('-fecha_creacion')  # Orden descendente (más nuevos primero)
+        inmuebles = inmuebles.order_by('fecha_creacion')  
+        inmuebles = inmuebles.order_by('-fecha_creacion')  
     
     regiones = Region.objects.all()
     return render(request, 'home.html', {
@@ -56,9 +55,9 @@ def crear_inmueble(request):
         form = InmuebleForm(request.POST, request.FILES)
         if form.is_valid():
             inmueble = form.save(commit=False)
-            inmueble.arrendador = request.user.perfil  # Asignar al arrendador
+            inmueble.arrendador = request.user.perfil 
             inmueble.save()
-            return redirect('home')  # Redirige al 'home' después de crear el inmueble
+            return redirect('home')  
     else:
         form = InmuebleForm()
     
@@ -94,7 +93,7 @@ def editar_perfil(request):
         form = EditarPerfilForm(request.POST, instance=perfil)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Cambia esto según tu URL
+            return redirect('home')
     else:
         form = EditarPerfilForm(instance=perfil)
     
